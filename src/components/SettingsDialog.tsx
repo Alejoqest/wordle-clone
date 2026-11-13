@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
 import Dialog from "./Dialog";
-import { getData, updateData } from "../services/dataService";
+import useTheme from "../hooks/useTheme";
 
 interface Props {
   open: boolean;
@@ -8,20 +7,7 @@ interface Props {
 }
 
 const SettingsDialog = ({ open, onExit }: Props) => {
-  const [darkMode, setDarkMode] = useState(() => {
-    const mode = getData();
-    if (!mode) return false;
-    return mode.darkMode;
-  });
-
-  const changeDarkMode = () => {
-    setDarkMode((prev) => !prev);
-  };
-
-  useEffect(() => {
-    updateData({ darkMode });
-    document.documentElement.classList.toggle("dark", darkMode);
-  }, [darkMode]);
+  const {darkMode, changeDarkMode} = useTheme();
 
   return (
     <Dialog title="Settings" open={open} onExit={onExit}>

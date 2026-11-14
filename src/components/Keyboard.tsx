@@ -1,4 +1,5 @@
 import { keys } from "../constants/keyboard";
+import useContrast from "../hooks/useContrast";
 import type { Letter } from "../types/word";
 import LetterKey from "./LetterKey";
 import OperationKey from "./OperationKey";
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const Keyboard = ({ letters, onInput, onEnter, onDelete }: Props) => {
+  const {highContrast} = useContrast();
   const getState = (value: string) => {
     const letter = letters.find((v) => v.value == value);
     return letter ? letter.state : "unused";
@@ -35,6 +37,7 @@ const Keyboard = ({ letters, onInput, onEnter, onDelete }: Props) => {
                 value={k.value!}
                 onInput={onInput}
                 state={getState(k.value!)}
+                contrast={highContrast}
               />
             ) : (
               <OperationKey

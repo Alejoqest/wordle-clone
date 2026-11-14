@@ -1,10 +1,11 @@
-import { tileColors } from "../constants/colors";
+import { tileColors, tileContrast } from "../constants/colors";
 import type { LetterState } from "../types/word";
 
 interface Props {
   value: string;
   state: LetterState;
   win?: boolean;
+  contrast?: boolean;
   index: number;
 }
 
@@ -12,10 +13,12 @@ const getDelay = (index: number) => {
   return { animationDelay: `${index * 100}ms` };
 };
 
-const Tile = ({ value, state, win, index }: Props) => {
+const Tile = ({ value, state, win, contrast, index }: Props) => {
   const border = state == "unused" ? "border-2" : "";
   const color = border
     ? "text-black dark:text-white"
+    : contrast && state !== "unused" && state !== "absent"
+      ? "text-black"
       : "text-white";
   const animation = win
     ? "animate-bouncing"
@@ -27,10 +30,12 @@ const Tile = ({ value, state, win, index }: Props) => {
       ? "border-black dark:border-neutral-600 animate-pop-in"
       : "border-neutral-300 dark:border-neutral-700";
 
+  const bg = !contrast ? tileColors[state] : tileContrast[state];
+
   return (
     <div style={getDelay(index)} className={animation}>
       <span
-        className={`flex h-full w-full items-center justify-center text-2xl font-black ${color} uppercase ${border} ${colorBorder} ${tileColors[state]} select-none`}
+        className={`flex h-full w-full items-center justify-center text-2xl font-black ${color} uppercase ${border} ${colorBorder} ${bg} select-none`}
       >
         {value}
       </span>

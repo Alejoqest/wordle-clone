@@ -20,6 +20,7 @@ export interface Data {
   attempts: Attempt[];
   state: GameState;
   darkMode: boolean;
+  highContrast: boolean;
 }
 
 export interface GameData {
@@ -33,4 +34,5 @@ export interface DataEdit {
   attempts?: Attempt[];
   state?: GameState;
   darkMode?: boolean;
+  highContrast?: boolean;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { LetterState } from "../types/word";
 import Tile from "./Tile";
+import useContrast from "../hooks/useContrast";
 
 const WORD_LENGTH = 5;
 
@@ -21,6 +22,7 @@ const TileRow = ({
   error,
   handleError,
 }: Props) => {
+  const { highContrast } = useContrast();
   const [bounce, setBounce] = useState(false);
 
   useEffect(() => {
@@ -42,6 +44,7 @@ const TileRow = ({
           value={values[i] ?? ""}
           state={states?.[i] ?? "unused"}
           index={i}
+          contrast={highContrast}
           win={bounce}
         />
       ))}

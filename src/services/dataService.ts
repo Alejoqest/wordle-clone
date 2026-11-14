@@ -6,6 +6,7 @@ const EMPTYDATA: Data = {
   attempts: [],
   state: "start",
   darkMode: false,
+  highContrast: false,
 };
 
 export const getData = (): Data => {

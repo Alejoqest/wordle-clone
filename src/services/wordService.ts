@@ -2,6 +2,8 @@ import type { ApiResponse } from "../types/game";
 
 const vowels = ["a", "e", "i", "o", "u", "y"];
 
+const FALLBACK_WORD = "words";
+
 const getRandom = <T>(arr: T[]): T | undefined =>
   arr[Math.floor(Math.random() * arr.length)];
 
@@ -29,8 +31,8 @@ export const getWord = async (): Promise<string> => {
 
     const word = getRandom(content.words);
 
-    return typeof word === "string" ? word : "";
+    return typeof word === "string" ? word : FALLBACK_WORD;
   } catch {
-    return "";
+    return FALLBACK_WORD;
   }
 };

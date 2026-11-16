@@ -1,4 +1,9 @@
+import type { ApiResponse } from "../types/game";
+
 const vowels = ["a", "e", "i", "o", "u", "y"];
+
+const getRandom = <T>(arr: T[]): T | undefined =>
+  arr[Math.floor(Math.random() * arr.length)];
 
 export const validateWord = (word: string): string => {
   if (word.length < 5) return "Not enough letters";
@@ -12,18 +17,19 @@ export const validateWord = (word: string): string => {
   return "";
 };
 
-export const getWord = async () => {
+export const getWord = async (): Promise<string> => {
   try {
-    const response = await fetch(
-      "https://random-words-api.kushcreates.com/api?language=en&category=wordle&type=lowercase&words=1",
-    );
+    const response = await fetch("/words.json");
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch word");
-    }
+    if (!response.ok) throw new Error("Failed to fetch word");
 
-    const content = await response.json();
-    return typeof content[0].word === "string" ? content[0].word : "";
+    const content: ApiResponse = await response.json();
+
+    if (!content.words.length) throw new Error("Empty Array");
+
+    const word = getRandom(content.words);
+
+    return typeof word === "string" ? word : "";
   } catch {
     return "";
   }

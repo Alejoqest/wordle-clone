@@ -38,3 +38,7 @@ export interface DataEdit {
   darkMode?: boolean;
   highContrast?: boolean;
 }
+
+export interface ApiResponse {
+  words: string[];
+}

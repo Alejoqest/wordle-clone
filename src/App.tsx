@@ -21,6 +21,7 @@ function App() {
   const [letters, setLetters] = useState<Letter[]>([]);
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [error, setError] = useState<boolean>(false);
+  const [hardMode, setHardMode] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,8 +37,8 @@ function App() {
 
   useEffect(() => {
     if (!word) return;
-    updateData({ word, attempts, state });
-  }, [word, attempts, state]);
+    updateData({ word, attempts, state, hardMode });
+  }, [word, attempts, state, hardMode]);
 
   useEffect(() => {
     if (attempts.length === 6 && state === "process") {
@@ -92,18 +93,29 @@ function App() {
       return;
     }
 
-    const letters = value.split("");
+    const split = value.split("");
     const target = word.split("");
     const hasWon = value === word;
 
-    const attempt: Attempt = letters.map((v) => ({
+    if (hardMode) {
+      const rights = letters.filter((v) => v.state !== "absent");
+      for (let i = 0; i < rights.length; i++) {
+        if (!split.includes(rights[i].value)) {
+          addMessage(`Guess must contain ${rights[i].value.toUpperCase()}`);
+          setError(true);
+          return;
+        }
+      }
+    }
+
+    const attempt: Attempt = split.map((v) => ({
       value: v,
       state: "absent",
     }));
 
     const remaining: string[] = [];
 
-    letters.forEach((v, i) => {
+    split.forEach((v, i) => {
       if (v === target[i]) {
         attempt[i].state = "correct";
       } else {
@@ -111,7 +123,7 @@ function App() {
       }
     });
 
-    letters.forEach((v, i) => {
+    split.forEach((v, i) => {
       if (attempt[i].state === "correct") return;
       const index = remaining.indexOf(v);
       if (index !== -1) {
@@ -160,9 +172,15 @@ function App() {
     });
   };
 
+  const changeHardMode = () => setHardMode((prev) => !prev);
+
   return (
     <div className="box-border min-h-screen dark:bg-stone-900 dark:text-white">
-      <Header />
+      <Header
+        numAttempts={attempts.length}
+        hardMode={hardMode}
+        onHardMode={changeHardMode}
+      />
       <MessageList list={messages} onDelete={removeMessage} />
       <main className="box-border flex justify-center">
         <div className="w-full max-w-125">

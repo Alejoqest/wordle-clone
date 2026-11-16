@@ -5,6 +5,7 @@ const EMPTYDATA: Data = {
   word: "",
   attempts: [],
   state: "start",
+  hardMode: false,
   darkMode: false,
   highContrast: false,
 };

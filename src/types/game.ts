@@ -19,6 +19,7 @@ export interface Data {
   word: string;
   attempts: Attempt[];
   state: GameState;
+  hardMode: boolean;
   darkMode: boolean;
   highContrast: boolean;
 }
@@ -33,6 +34,7 @@ export interface DataEdit {
   word?: string;
   attempts?: Attempt[];
   state?: GameState;
+  hardMode?: boolean;
   darkMode?: boolean;
   highContrast?: boolean;
 }

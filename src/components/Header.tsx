@@ -5,7 +5,13 @@ import SettingsDialog from "./SettingsDialog";
 import HelpIcon from "../icons/HelpIcon";
 import InfoDialog from "./InfoDialog";
 
-const Header = () => {
+interface Props {
+    numAttempts: number;
+  hardMode: boolean;
+  onHardMode: () => void;
+}
+
+const Header = ({numAttempts, hardMode, onHardMode}: Props) => {
   const [settings, setSettings] = useState(false);
   const [help, setHelp] = useState(false);
 
@@ -25,7 +31,7 @@ const Header = () => {
           <HelpIcon />
         </Button>
       </div>
-      <SettingsDialog open={settings} onExit={offSettings} />
+      <SettingsDialog open={settings} numAttempts={numAttempts} hardMode={hardMode} onHardMode={onHardMode} onExit={offSettings} />
       <InfoDialog open={help} onExit={offHelp} />
     </header>
   );

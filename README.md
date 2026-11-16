@@ -61,10 +61,16 @@ If you want to fork this project.
    cd wordle-clone
    ```
 
-3. Start the app.
+3. Install dependencies.
 
    ```bash
-   npm run dev
+   pnpm install
+   ```
+
+4. Start the app.
+
+   ```bash
+   pnpm run dev
    ```
 
 ## Thank you for reading!

@@ -29,12 +29,13 @@ This a clone of wordle made in React. It has all the basic operations that wordl
 - The **Enter key** can only be pressed once 5 letters are inputed. Before submitting, the guess has to pass a simple validation check:
   - **Not be the same letter** 5 times.
   - Have at least a **single vowel sounding letter** (`a`, `e`, `i`, `o`, `u` or `y` ).
+  - If playing the hard mode, then introducing all the guess of previous attempts is necessary.
 - The **inputed guess gets compared with word** for correct guesses. A letter can be `unused`, `absent`, `present` and `correct`.
 - After a guess, the **keyboard gets updated** with letters guesses.
 - Has a **maximun of 6 times to guess the word**, if not, the game ends.
 - After the game ends, there's a option to **start another one**.
 - There's **two buttons in the header**:
-  - One opens a dialog that allows to **change the theme** between light or dark in the application.
+  - One opens a dialog that allows to **change the theme** between light or dark in the application. A high contrast mode for color blind people. And an option to choose the hardmode (can't be toggled when already started).
   - Another opens a dialog shows **how to play wordle**.
 - Bellow the header **messages are displayed for feedback**. The messages can be:
   - **Failing a validation** check.

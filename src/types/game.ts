@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Attempt } from "./word";
 
 export interface Key {
@@ -41,4 +42,9 @@ export interface DataEdit {
 
 export interface ApiResponse {
   words: string[];
+}
+
+export interface ExampleInfo {
+  row: Attempt;
+  content: ReactNode;
 }

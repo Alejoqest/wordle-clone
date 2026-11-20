@@ -1,19 +1,13 @@
-import type { ReactNode } from "react";
-import type { Attempt } from "../types/word";
 import Dialog from "./Dialog";
-import TileRow from "./TileRow";
+import type { ExampleInfo } from "../types/game";
+import AttemptRow from "./AttemptRow";
 
 interface Props {
   open: boolean;
   onExit: () => void;
 }
 
-interface Example {
-  row: Attempt;
-  content: ReactNode;
-}
-
-const examples: Example[] = [
+const examples: ExampleInfo[] = [
   {
     row: [
       { value: "w", state: "correct" },
@@ -74,10 +68,7 @@ const InfoDialog = ({ open, onExit }: Props) => {
         {examples.map((v, i) => (
           <div key={i}>
             <div className="mb-1 w-75">
-              <TileRow
-                values={v.row.map((d) => d.value)}
-                states={v.row.map((d) => d.state)}
-              />
+              <AttemptRow rowIndex={i} attempt={v.row} win={false} />
             </div>
             <p className="mb-2">{v.content}</p>
           </div>

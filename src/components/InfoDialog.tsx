@@ -34,8 +34,8 @@ const examples: ExampleInfo[] = [
     row: [
       { value: "r", state: "unused" },
       { value: "o", state: "unused" },
-      { value: "u", state: "unused" },
-      { value: "g", state: "absent" },
+      { value: "g", state: "unused" },
+      { value: "u", state: "absent" },
       { value: "e", state: "unused" },
     ],
     bold: "U",

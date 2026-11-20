@@ -20,44 +20,47 @@ const SettingsDialog = ({
   const hardModeDisabled = numAttempts > 0;
   const { darkMode, changeDarkMode } = useTheme();
   const { highContrast, changeContrast } = useContrast();
+  const options = [
+    {
+      title: "Hard Mode",
+      subtitle: "Any revealed hints must be used in subsequent guesses",
+      value: hardMode,
+      handleChange: onHardMode,
+      disabled: hardModeDisabled,
+    },
+    {
+      title: "Dark Theme",
+      value: darkMode,
+      handleChange: changeDarkMode,
+    },
+    {
+      title: "High Contrast Mode",
+      subtitle: "Contrast and colorblindness improvements",
+      value: highContrast,
+      handleChange: changeContrast,
+    },
+  ];
 
   return (
     <Dialog title="Settings" open={open} onExit={onExit}>
       <section>
-        <div className="flex items-center justify-between py-4">
-          <div>
-            <h3>Hard Mode</h3>
-            <p className="text-xs">
-              Any revealed hints must be used in subsequent guesses
-            </p>
-          </div>
-          <input
-            type="checkbox"
-            checked={hardMode}
-            onChange={onHardMode}
-            disabled={hardModeDisabled}
-          />
-        </div>
-        <hr />
-        <div className="flex items-center justify-between py-4">
-          <div>
-            <h3>Dark Mode</h3>
-          </div>
-          <input type="checkbox" checked={darkMode} onChange={changeDarkMode} />
-        </div>
-        <hr />
-        <div className="flex items-center justify-between py-4">
-          <div>
-            <h3>High Contrast Mode</h3>
-            <p className="text-xs">Contrast and colorblindness improvements</p>
-          </div>
-          <input
-            type="checkbox"
-            checked={highContrast}
-            onChange={changeContrast}
-          />
-        </div>
-        <hr />
+        {options.map((v) => (
+          <>
+            <div className="flex items-center justify-between py-4">
+              <div className="pr-2">
+                <h3 className="m-0">{v.title}</h3>
+                {v.subtitle && <p className="m-0 text-xs">{v.subtitle}</p>}
+              </div>
+              <input
+                type="checkbox"
+                checked={v.value}
+                onChange={v.handleChange}
+                disabled={v.disabled}
+              />
+            </div>
+            <hr />
+          </>
+        ))}
         <div className="flex justify-between py-2">
           <a href="https://github.com/Alejoqest" className="text-sm">
             Made by Alejoqest

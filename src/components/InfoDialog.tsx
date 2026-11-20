@@ -22,7 +22,11 @@ const examples: Example[] = [
       { value: "d", state: "unused" },
       { value: "y", state: "unused" },
     ],
-    content: <><b>W</b> is in the word and in the correct spot.</>
+    content: (
+      <>
+        <b>W</b> is in the word and in the correct spot.
+      </>
+    ),
   },
   {
     row: [
@@ -32,8 +36,11 @@ const examples: Example[] = [
       { value: "h", state: "unused" },
       { value: "t", state: "unused" },
     ],
-    content: <><b>I</b> is in the word but in the wrong spot.</>
-    ,
+    content: (
+      <>
+        <b>I</b> is in the word but in the wrong spot.
+      </>
+    ),
   },
   {
     row: [
@@ -43,7 +50,11 @@ const examples: Example[] = [
       { value: "g", state: "absent" },
       { value: "e", state: "unused" },
     ],
-    content: <><b>U</b> is not in the word in any spot.</>
+    content: (
+      <>
+        <b>U</b> is not in the word in any spot.
+      </>
+    ),
   },
 ];
 
@@ -60,8 +71,8 @@ const InfoDialog = ({ open, onExit }: Props) => {
           </li>
         </ul>
         <h2 className="mb-3 font-bold">Examples</h2>
-        {examples.map((v) => (
-          <>
+        {examples.map((v, i) => (
+          <div key={i}>
             <div className="mb-1 w-75">
               <TileRow
                 values={v.row.map((d) => d.value)}
@@ -69,7 +80,7 @@ const InfoDialog = ({ open, onExit }: Props) => {
               />
             </div>
             <p className="mb-2">{v.content}</p>
-          </>
+          </div>
         ))}
         <hr />
         <p className="my-2">You can try different words everytime you lose.</p>

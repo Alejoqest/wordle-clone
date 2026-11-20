@@ -16,11 +16,8 @@ const examples: ExampleInfo[] = [
       { value: "d", state: "unused" },
       { value: "y", state: "unused" },
     ],
-    content: (
-      <>
-        <b>W</b> is in the word and in the correct spot.
-      </>
-    ),
+    bold: "W",
+    text: "is in the word and in the correct spot.",
   },
   {
     row: [
@@ -30,11 +27,8 @@ const examples: ExampleInfo[] = [
       { value: "h", state: "unused" },
       { value: "t", state: "unused" },
     ],
-    content: (
-      <>
-        <b>I</b> is in the word but in the wrong spot.
-      </>
-    ),
+    bold: "I",
+    text: "is in the word but in the wrong spot.",
   },
   {
     row: [
@@ -44,11 +38,8 @@ const examples: ExampleInfo[] = [
       { value: "g", state: "absent" },
       { value: "e", state: "unused" },
     ],
-    content: (
-      <>
-        <b>U</b> is not in the word in any spot.
-      </>
-    ),
+    bold: "U",
+    text: "is not in the word in any spot.",
   },
 ];
 
@@ -70,7 +61,9 @@ const InfoDialog = ({ open, onExit }: Props) => {
             <div className="mb-1 w-75">
               <AttemptRow rowIndex={i} attempt={v.row} win={false} />
             </div>
-            <p className="mb-2">{v.content}</p>
+            <p className="mb-2">
+              <b>{v.bold}</b> {v.text}
+            </p>
           </div>
         ))}
         <hr />

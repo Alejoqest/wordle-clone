@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import type { Attempt } from "./word";
 
 export interface Key {
@@ -46,5 +45,6 @@ export interface ApiResponse {
 
 export interface ExampleInfo {
   row: Attempt;
-  content: ReactNode;
+  bold: string;
+  text: string;
 }
